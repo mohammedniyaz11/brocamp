@@ -1,0 +1,47 @@
+<% layout('layouts/new') %> 
+
+
+<table class="table">
+  
+    <thead>
+      <tr>
+        <th scope="col">Name of the user</th>
+        <th scope="col">campprice</th>
+        <th scope="col">camppricededucted</th>
+        <th scope="col">camppriceto paid</th>
+        <th scope="col">isStatus</th>
+        <% if(currentUser && currentUser.isAdmin){ %>         
+        <th scope="col">pay</th>
+        <% } %> 
+        
+        
+      </tr>
+    </thead>
+
+    <tbody>
+    
+        <% for(let cancelbooking of cancelledBookingMessage) {%>
+            <%  if( (currentUser && cancelbooking.author.equals(currentUser._id))||(currentUser && currentUser.isAdmin)||(currentUser && cancelbooking.campground.author.equals(currentUser._id))){%>
+
+      <tr>
+        <th scope="row"><%= cancelbooking.author.username %> </th>
+        <td><%= cancelbooking.campprice %></td>
+        <td><%= cancelbooking.camppricededucted %></td>
+        <td><%=cancelbooking.campricetopaid %> </td>
+        <td><%=cancelbooking.isStatus %> </td>
+    <td>
+        <% if(currentUser && currentUser.isAdmin){ %> 
+    <form action="/cancelmessage/<%=cancelbooking._id %> "   method="post">
+        <button class="btn btn-success">Approve Refund</button>
+    </form>
+    <% } %> 
+       </td> 
+
+
+      </tr>
+   
+      <% } %> 
+      <% } %> 
+    </tbody>
+  
+  </table>

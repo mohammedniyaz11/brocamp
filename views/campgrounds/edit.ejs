@@ -1,0 +1,88 @@
+<% layout('layouts/new') %>
+    
+    
+
+    <div class="row mt-5">
+        <h1 class="text-center">Edit Campground</h1>
+        <div class="col-6 offset-3">
+            <form action="/campgrounds/<%=campground._id %>?_method=PUT " method="post" novalidate class="validated-form" enctype="multipart/form-data">  
+                <div class="mb=3">
+                    <label class="form-label" for="title">Title</label>
+                        <input class="form-control" type="text" name="campground[title]" id="title" value="<%= campground.title %>" required>
+                        <div class="valid-feedback">
+                            Looks good
+                        </div>
+                </div>
+                <div class="mb-3"> 
+                    <label class="form-label" for="location">Location</label>
+                        <input class="form-control" type="text" name="campground[location]" id="location"  value="<%= campground.location %> "required>
+                        <div class="valid-feedback">
+                            Looks good
+                        </div>
+                </div>
+                <div class="mb-3"> 
+                    <label class="form-label" for="image">Add images</label>
+                        <!-- <input class="form-control" type="text" name="campground[image]" id="image"  value="<%= campground.image %> " required>
+                        <div class="valid-feedback">
+                            Looks good
+                        </div> -->
+                    <input type="file" name="image" id="image" multiple>
+
+
+
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="price">Campground-Price</label>
+                <div class="input-group mb-3">
+                 
+                     <span class="input-group-text" id="price">$</span>
+                    <input type="text" class="form-control" id="price" placeholder="0.0" aria-label="price" name="campground[price]" value="<%= campground.price %>" required>
+                  </div>
+                  <div class="valid-feedback">
+                    Looks good
+                </div>
+                </div>
+                <div class="mb-3"> 
+                    <label class="form-label" for="description">Description</label>
+                        <textarea class="form-control" type="text" name="campground[description]" id="description"  value="" required></textarea>
+                        <div class="valid-feedback">
+                            Looks good
+                        </div>
+                </div>
+               
+    
+    
+                <button class="btn btn-success">edit campground</button>
+            </form>
+            <a href="/campgrounds" > ALL ampgrounds</a>
+        </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    </div>
+    <script>
+         (function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.validated-form')
+  
+    // Loop over them and prevent submission
+    Array.from(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+  </script>

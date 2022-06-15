@@ -1,0 +1,141 @@
+<% layout('layouts/new') %> 
+
+<h1>payement gateway<%=campground.title%> </h1>
+<h2>$:<%=campground.price %></h2>
+
+
+
+
+
+
+
+
+
+<% layout('layouts/new') %>
+    
+    
+
+   
+    
+    
+    
+    
+    
+<div class="row mt-5">
+    <h1 class="text-center">confirm Booking</h1>
+
+ 
+
+
+   <div class="col-6 offset-3">
+        <form action="/payments/<%=campground._id %> "   method="post" novalidate class="validated-form">  
+            <div class="mb=3">
+                <label class="form-label" for="title">Date Start</label>
+                    <input class="form-control" type="date" name="date" id="title" value="" required>
+                    <div class="valid-feedback">
+                        Looks good
+                    </div>
+            </div>
+           
+            <div class="mb=3">
+                <label class="form-label" for="title">Date now</label>
+                    <input class="form-control" type="date" name="datenow" id="title" value="" required>
+                    <div class="valid-feedback">
+                        Looks good
+                    </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="mb-3"> 
+                <label class="form-label" for="location">No of members</label>
+                    <input class="form-control" type="text" name="totalmembers" id="location"  value="" required >
+                    <div class="valid-feedback">
+                        Looks good
+                    </div>
+            </div>
+            <div class="mb-3"> 
+                <!-- <label class="form-label" for="location">No of members</label> -->
+                    <input class="form-control" type="text" name="campid" id="location"  value="<%= campground._id %> " required hidden>
+                    <div class="valid-feedback">
+                        Looks good
+                    </div>
+            </div>
+            <div class="mb-3"> 
+                <!-- <label class="form-label" for="location">No of members</label> -->
+                    <input class="form-control" type="text" name="campprice" id="location"  value="<%= campground.price %> " required readonly hidden>
+                    <div class="valid-feedback">
+                        Looks good
+                    </div>
+            </div>
+            <div class="mb-3"> 
+                <!-- <label class="form-label" for="location">No of members</label> -->
+                    <input class="form-control" type="text" name="user" id="location"  value="<%= campground.author %> " required readonly hidden>
+                    <div class="valid-feedback">
+                        Looks good
+                    </div>
+            </div>
+            <button class="btn btn-success">Confirm Booking</button>
+        </form>
+        <a href="/campgrounds" > ALL ampgrounds</a>
+    </div>
+
+    <script>
+         (function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.validated-form')
+  
+    // Loop over them and prevent submission
+    Array.from(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+  </script>
+
+
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        $("#id-form").submit((e) => {
+            e.preventDefault()
+            $.ajax({
+                url: '/book/campgrounds',
+                method: 'post',
+                data: $('#id-form').serialize(),
+                success: (response) => {
+                    
+                    if (response) {
+                        alert("Sucessfully Completed")
+                        razorpayPay(response)
+                    } else {
+                        console.log("error occured")
+                    }
+
+                }
+            })
+
+        })
+</script>
+
+
+
+
+
+
+
+
+

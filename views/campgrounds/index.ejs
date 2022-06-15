@@ -1,0 +1,84 @@
+<% layout('layouts/new') %> 
+<link rel="stylesheet" href="/css/index.css">
+<div id="map" style="width:100%;height: 400px;">
+
+</div>
+
+
+
+
+    <h1 style="color: whitesmoke;">all Campgrounds</h1>
+    <h3 ><a href="/campgrounds/new" style="color: wheat;">Add campgrounds</a></h3>
+    <% if(currentUser && currentUser.isAdmin) {%> 
+        <h1>this is the adminsss</h1>
+   <% } %> 
+    <div class="col-6 park-sign-svg default-park-sign-size d-flex flex-column justify-content-evenly px-5 pb-2">
+        <form action="/search" method="GET" class="form-inline">
+            <div class="form-group">
+                <input type="text" name="search" placeholder="Search" class="form-control py-2 fs-4 title-font">
+            </div>
+        </form>
+        </div>
+
+    
+ 
+ 
+ 
+    
+
+
+
+        <% for(let campground of campgrounds) {%>
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-4">
+                        <% if(campground.images.length) {%> 
+                        <img src="<%=campground.images[0].url%> " class="img-fluid" alt="Responsive image">
+                        <% } else {%>
+                        
+                            <img src="https://media.istockphoto.com/photos/woman-resting-laying-on-hammock-at-camping-site-picture-id1383464109?b=1&k=20&m=1383464109&s=170667a&w=0&h=ssnAnx8HVAemx9NXDsKkTfo_cP6_jM76D3iJNF6REPE=" class="img-fluid" alt="Responsive image">
+                            <% } %>   
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= campground.title %> 
+
+                            </h5>
+                            <p class="card-text">
+                            <%=campground.description %> 
+                            </p>
+                            <p class="card-text">
+                             price:<%=campground.price %> 
+                                </p>
+                            <p class="card-text">
+                              <small class="text-muted">  <%=campground.location %> </small>
+                            </p>
+                            <a class="btn btn-primary" href="/campgrounds/<%= campground._id %> ">View <%=campground.title %> </a>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+            <% } %>  
+    
+<script>
+    function sendData(e){
+        fetch('getCampgrounds',{
+            method:'post',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({payload:e.value})
+        })
+    }
+</script>
+<script>
+      const campgrounds ={features:<%-JSON.stringify(campgrounds) %>}
+</script>
+
+
+<script src="/javascript/clusterMap.js"></script>
+

@@ -1,0 +1,66 @@
+<% layout('layouts/new') %> 
+ 
+
+<% for(let booked of bookingname) {%>
+ 
+    <%  if( (currentUser && booked.author.equals(currentUser._id))||(currentUser && currentUser.isAdmin)||(currentUser && booked.campground.author.equals(currentUser._id))){%>
+
+    <div class="card">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="<%=booked.campground.images[0].url%>" class="img-fluid" alt="Responsive image">
+            </div>
+           
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        booked by:<%= booked.author.username %>  
+                    </h5>
+                   
+                    <p class="card-text">
+            booking date:<%= booked.date %>  
+            booking location:<%= booked.campground.location %>    
+           
+                
+
+
+                    <p class="card-text">
+                        price:$<%= booked.campprice %>     
+                          </p>
+                 
+
+                        <p class="card-text">
+                        created at:<%= booked.createdAt %> 
+                            </p>
+
+                
+                    <!-- <p class="card-text">
+                      <small class="text-muted">  </small>
+                    </p> -->
+                    <div style="display: flex;">
+                    <form action="bookeduser/<%=booked._id %>" method="post">
+                        <button class="btn btn-danger">Cancel</button>
+                </form>
+                <a class="btn btn-primary ml-5" href="/bookeduser/<%=booked._id%>" >View Details</a>
+                <%if (currentUser && currentUser.isAdmin) {%> 
+                <form action="bookeduser/<%=booked._id %>/deliverd" method="post">
+                        <button class="btn btn-danger">Deliverd</button>
+                </form>
+                <% } %> 
+            </div>
+                <!-- <div>
+                <a class="btn btn-primary" href="/campgrounds/ ">View Details</a>
+            </div> -->
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+<% } %> 
+
+<% } %> 
+
+

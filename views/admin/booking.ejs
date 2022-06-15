@@ -1,0 +1,176 @@
+<% layout('layouts/new') %> 
+    <div class="row mt-5">
+        <h1 class="text-center">confirm Booking</h1>
+        <div class="col-6 offset-3">
+            <form action=""  id="id-form"  method="post" novalidate class="validated-form"> 
+
+                <div class="mb-3"> 
+                    <label class="form-label" for="location">Check in</label>
+                        <input class="form-control" type="text" name="" id="location"  value="<%=bookingdetails.date%>" required readonly>
+                        <div class="valid-feedback">
+                            Looks good
+                        </div>
+                </div>
+
+                <div class="mb-3"> 
+                    <label class="form-label" for="location">Check out</label>
+                        <input class="form-control" type="text" name="" id="location"  value="<%=bookingdetails.datenow%>" required readonly>
+                        <div class="valid-feedback">
+                            Looks good
+                        </div>
+                </div>
+
+
+
+
+
+             <div class="mb-3"> 
+                    <label class="form-label" for="location">No of members</label>
+                        <input class="form-control" type="text" name="totalmembers" id="location"  value="<%=bookingdetails.totalmembers%>" required readonly>
+                        <div class="valid-feedback">
+                            Looks good
+                        </div>
+                </div>
+               
+                <div class="mb-3"> 
+                    <!-- <label class="fossrm-label" for="location">No of members</label> -->
+                    <label class="form-label" for="location">price</label>
+                        <input class="form-control" type="text" name="campprice" id="location"  value="<%=bookingdetails.campprice%>" required readonly >
+                        <div class="valid-feedback">
+                            Looks good
+                        </div>
+                </div>
+             
+
+
+              
+               
+                
+ <button class="btn btn-success">Check out</button>
+            </form>
+            <a href="/campgrounds" > ALL ampgrounds</a>
+        </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    $("#id-form").submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/booking/<%=bookingdetails._id%> ',
+            method: 'post',
+            data: $('#id-form').serialize(),
+            success: (response) => {
+                
+                if (response) {
+                    alert("Sucessfully Completed")
+                    razorpayPay(response)
+                } else {
+                    console.log("error occured")
+                }
+
+            }
+        })
+
+    })
+
+
+    function razorpayPay(order) {
+        console.log(order)
+           
+           var options = {
+               "key": "rzp_test_gDNJhOY4BSTbti", // Enter the Key ID generated from the Dashboard
+               "amount": order.amount*72, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+               "currency": "INR",
+               "name": "yelpcamp ",
+               "description": "yelp camp Booking",
+               "image": "https://example.com/your_logo",
+               "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+               "handler": function (response) {
+                  // alert(response.razorpay_payment_id);
+                  // alert(response.razorpay_order_id);
+                   //alert(response.razorpay_signature);
+       
+       
+                   verifyPayment(response, order)
+                   
+       
+               },
+               "prefill": {
+                   "name": "Campground",
+                   "email": "mohemmedniyaz11@gmail.com",
+                   "contact": "1234567890"
+               },
+               "notes": {
+                   "address": "Razorpay Corporate Office"
+               },
+               "theme": {
+                   "color": "#FC6414"
+               }
+           };
+       
+           var rzp1 = new Razorpay(options);
+           rzp1.open();
+       
+       
+       }
+       
+       
+       function verifyPayment(payment, order) {
+           
+           $.ajax({
+               url: '/user/verify-payment',
+               data: {
+                   payment,
+                   order
+               },
+               method: 'post',
+               success: (response) => {
+                   
+                   if (response.status) {
+                       
+                       location.href = '/bookeduser'
+                   } else {
+                       alert("payment failed")
+                   }
+               }
+           })
+       }
+
+</script>
+
+
+
+
+
+
+
+    <script>
+         (function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.validated-form')
+  
+    // Loop over them and prevent submission
+    Array.from(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+  </script>
+
+
+    
+
+
+
+
+

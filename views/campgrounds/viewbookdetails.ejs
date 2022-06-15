@@ -1,0 +1,137 @@
+<% layout('layouts/new') %> 
+<link href=
+"https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+        integrity=
+"sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
+        crossorigin="anonymous" rel="stylesheet">
+  
+    <!-- Html2Pdf  -->
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.1/html2pdf.bundle.min.js" 
+        integrity=
+"sha512vDKWohFHe2vkVWXHp3tKvIxxXg0pJxeid5eo+UjdjME3DBFBn2F8yWOE0XmiFcFbXxrEOR1JriWEno5Ckpn15A==" 
+        crossorigin="anonymous">
+    </script>
+
+
+
+
+
+
+<form id ="form-print" enctype="text/plain" >
+
+
+
+<div class="card">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="<%=booked.campground.images[0].url%>" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">
+             booked by:<%= booked.author.username %> 
+
+                </h5>
+                <p class="card-text">
+        checkin:<%= booked.date %>     
+                </p>
+                <p class="card-text">
+        checkout:<%= booked.datenow %>     
+                    </p>
+                    <p class="card-text">
+                        isStatus:<%= booked.isStatus %>     
+                    </p>
+                <p class="card-text">
+                    price:$<%= booked.campprice %>     
+                      </p>
+                <p class="card-text">
+                    location:<%= booked.campground.location %> 
+                    </p>
+
+
+                    <p class="card-text">
+                    created at:<%= booked.createdAt %> 
+                        </p>
+
+            
+           
+              
+               
+          
+        </div>
+            <!-- <div>
+            <a class="btn btn-primary" href="/campgrounds/ ">View Details</a>
+        </div> -->
+        <div style="display: flex;">
+        <input type="button" class="btn btn-primary" 
+onclick="GeneratePdf();" value="getyourticket">
+</form>
+
+</div>
+            </div>
+        </div>
+
+    </div>
+
+    <form action="/sendmessage/<%=booked._id%>" method="post">
+        <div class="mb-3">
+            <label class="form-label" for="number">Get Ticket on your Phone Number</label>
+            <input class="form-control" type="text" id="number" value="<%=booked.author.number %> "
+            name="number" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+        <div>
+
+
+    <button class="btn btn-success">Submit</button>
+
+</form>
+
+
+<form action="/sendmail/<%=booked._id%>" method="post">
+    <div class="mb-3">
+        <label class="form-label" for="number">Get Ticket on your Email</label>
+        <input class="form-control" type="text" id="number"   name="email" value="<%=booked.author.email %> "
+        name="number" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+    <div>
+
+
+<button class="btn btn-success">Submit</button>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+    
+
+</div>
+
+
+<script>          
+    // Function to GeneratePdf
+    function GeneratePdf() {
+        var element = document.getElementById('form-print');
+        html2pdf(element);
+    }
+</script>
+
+<script src=
+"https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity=
+"sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" 
+    cross
+
+
+
