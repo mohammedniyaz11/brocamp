@@ -6,7 +6,7 @@ if (process.env.NODE_ENV !== "production") {
 
 
 
-const dbUrl="mongodb://localhost:27017/bro-camps"
+const dbUrl="mongodb+srv://our-first-user:D1fGJuPKFWjH3r0e@cluster0.ucxktug.mongodb.net/?retryWrites=true&w=majority"
 const mongoSanitize = require('express-mongo-sanitize');
 const nodemailer=require('nodemailer')
 const fast2sms = require('fast-two-sms')
@@ -769,9 +769,9 @@ app.use((err,req,res,next)=>{
 
 
 
+const port=80
 
-
-app.listen(3000,()=>{
+app.listen(port||3000,()=>{
     console.log(`serving on port 3000`)
 })
 
