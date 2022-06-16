@@ -771,7 +771,7 @@ app.use((err,req,res,next)=>{
 
 const port=80
 
-app.listen(port||3000,()=>{
+app.listen(3000||port,()=>{
     console.log(`serving on port 3000`)
 })
 
