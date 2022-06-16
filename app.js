@@ -58,7 +58,7 @@ var instance = new Razorpay({
 
 
 
-mongoose.connect( dbUrl, );
+mongoose.connect( "mongodb+srv://our-first-user:D1fGJuPKFWjH3r0e@cluster0.ucxktug.mongodb.net/?retryWrites=true&w=majority", );
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
