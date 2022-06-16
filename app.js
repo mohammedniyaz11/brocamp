@@ -248,11 +248,14 @@ app.post('/payments/:id',isLoggedIn,async(req,res)=>{
     })
 
 
+// app.get('/califorina',async(req,res)=>{
+//   const cali=await Campground.find( {location:"california"})
+// res.ren
+// })
 
 
 
-
-app.get('/sortlow',async (req,res)=>{
+app.get('/sortlow',isLoggedIn,async (req,res)=>{
  const campgrounds= await Campground.aggregate(
         [
           { $sort : { price : 1 } }
@@ -268,7 +271,7 @@ app.get('/sortlow',async (req,res)=>{
 
 
 
-app.get('/sorthigh',async (req,res)=>{
+app.get('/sorthigh',isLoggedIn,async (req,res)=>{
     const campgrounds= await Campground.aggregate(
            [
              { $sort : { price : -1 } }
