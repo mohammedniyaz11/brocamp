@@ -2,6 +2,7 @@
 
 <h1>payement gateway<%=campground.title%> </h1>
 <h2>$:<%=campground.price %></h2>
+<h5>if you are cancelling the ticket  70% amount will be refunded not 100% </h5>
 
 
 
@@ -30,7 +31,7 @@
    <div class="col-6 offset-3">
         <form action="/payments/<%=campground._id %> "   method="post" novalidate class="validated-form">  
             <div class="mb=3">
-                <label class="form-label" for="title">Date Start</label>
+                <label class="form-label" for="title">Check in</label>
                     <input class="form-control" type="date" name="date" id="title" value="" required>
                     <div class="valid-feedback">
                         Looks good
@@ -38,7 +39,7 @@
             </div>
            
             <div class="mb=3">
-                <label class="form-label" for="title">Date now</label>
+                <label class="form-label" for="title">Check Out</label>
                     <input class="form-control" type="date" name="datenow" id="title" value="" required>
                     <div class="valid-feedback">
                         Looks good
