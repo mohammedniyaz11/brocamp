@@ -660,7 +660,7 @@ app.post('/sendmail/:id',isLoggedIn,async(req,res)=>{
         service: 'gmail',
         auth: {
           user: 'mohemmedniyaz11@gmail.com',
-          pass: 'yznnjadtqjfhisxx'
+          pass: 'Niyaz@909'
         }
       });
        console.log("reciepents email is ======",req.body)

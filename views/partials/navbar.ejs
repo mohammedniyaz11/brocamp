@@ -7,7 +7,8 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">        
       <div class="navbar-nav">
         <a class="nav-link active" href="/">Home</a>
-        <% if(currentUser && currentUser.isAdmin) {%> 
+        <%if(typeof currentUser !=='undefined' && currentUser){%>
+
         <a class="nav-link active" href="/user">All user</a>
      
         <a class="nav-link active" href="/report">Sales Report</a>
@@ -16,7 +17,7 @@
        
         <% } %> 
      
-        <%if(currentUser) {%> 
+        <%if(typeof currentUser !=='undefined' && currentUser) {%> 
           <a class="nav-link" href="/cancelmessage">Cancel message</a>
         <a class="nav-link" href="/bookeduser">booking details</a>
         <% } %> 
