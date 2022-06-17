@@ -674,7 +674,7 @@ app.post('/sendmail/:id',isLoggedIn,async(req,res)=>{
        
       transport.sendMail(mailOptions, function(error, info){
         if (error) {
-          console.log(error);
+          console.log(error,"its error");
         } else {
          res.send('mail has been sent')
         }
