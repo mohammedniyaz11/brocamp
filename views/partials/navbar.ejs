@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="navbar-nav ml-auto">
-        <%if(!currentUser) {%> 
+        <%if(typeof currentUser !=='undefined' && !currentUser) {%> 
         <a class="nav-link" href="/login">Login</a>
         <a class="nav-link" href="/register">Regiester</a>
         <% }else{%> 
@@ -44,7 +44,7 @@
       <form action="/logout" method="post">
         <button>logout</button>
       </form>
-      <!-- <% } %>  -->
+       <% } %> 
     </div>
   </div>
 </nav>
