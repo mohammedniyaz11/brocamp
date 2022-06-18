@@ -30,7 +30,7 @@ router.route('/')
 
     
 router.route('/:id')
-    .get(catchAsync(campgrounds.showCampground))
+    .get(isLoggedIn,catchAsync(campgrounds.showCampground))
     .put(isLoggedIn,upload.array('image'),catchAsync(campgrounds.updateCampground))
     .delete(isLoggedIn,catchAsync(campgrounds.deleteCampground))
 
