@@ -1,5 +1,5 @@
 
-<% if(typeof success !=='undefined' && success.length){%> 
+<% if(typeof success !=='undefined'  && success.length){%> 
 
     <div class="alert alert-success  alert-dismissible fade show" role="alert">
     <%= success %> 
@@ -8,10 +8,10 @@
     </button>
     </div>
     <% } %> 
-    <% if(typeof error !=='undefined' && error && error.length){%> 
+    <% if(typeof error =='undefined' && error && error.length){%> 
     
         <div class="alert alert-danger  alert-dismissible fade show" role="alert">
-        <%= typeof err !=='undefined' && error %> 
+        <%= typeof err =='undefined' && error %> 
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
