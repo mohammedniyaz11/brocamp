@@ -1,5 +1,9 @@
 <% layout('layouts/new') %> 
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
 <h1>payement gateway<%=campground.title%> </h1>
 <h2>$:<%=campground.price %></h2>
 <h5>if you are cancelling the ticket  70% amount will be refunded not 100% </h5>
@@ -31,16 +35,16 @@
    <div class="col-6 offset-3">
         <form action="/payments/<%=campground._id %> "   method="post" novalidate class="validated-form">  
             <div class="mb=3">
-                <label class="form-label" for="title">Check in</label>
-                    <input class="form-control" type="date" name="date" id="title" value="" required>
+                <label class="form-label" >Check in</label>
+                    <input class="form-control" type="date" name="date" id="disableRange" value="" required>
                     <div class="valid-feedback">
                         Looks good
                     </div>
             </div>
            
             <div class="mb=3">
-                <label class="form-label" for="title">Check Out</label>
-                    <input class="form-control" type="date" name="datenow" id="title" value="" required>
+                <label class="form-label" >Check Out</label>
+                    <input class="form-control" type="date" name="datenow" id="disableRange" value="" required>
                     <div class="valid-feedback">
                         Looks good
                     </div>
@@ -109,28 +113,14 @@
 
 
 
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <script>
-        $("#id-form").submit((e) => {
-            e.preventDefault()
-            $.ajax({
-                url: '/book/campgrounds',
-                method: 'post',
-                data: $('#id-form').serialize(),
-                success: (response) => {
-                    
-                    if (response) {
-                        alert("Sucessfully Completed")
-                        razorpayPay(response)
-                    } else {
-                        console.log("error occured")
-                    }
-
-                }
-            })
-
-        })
-</script>
+<script>
+    flatpickr('#disableRange', {
+    
+        disable: [ { 'from' : "2016-07-06", 'to' : "2016-07-09" } ],
+        minDate: new Date()
+    
+    });
+    </script>
 
 
 
