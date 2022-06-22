@@ -50,10 +50,7 @@ const { isLoggedIn } = require('./middleware');
 ///database connections
 
 const MongoDBStore = require("connect-mongo");
-var instance = new Razorpay({
-    key_id: "rzp_test_gDNJhOY4BSTbti",
-    key_secret: "K7JzaPqDtuZ4zMbawwSoVQ1t",
-  });
+
 
 
 
